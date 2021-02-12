@@ -1,0 +1,90 @@
+<html>
+
+<head>
+  <style>
+    div {
+      margin: 5px;
+      padding: 5px;
+      text-align: center;
+      vertical-align: center;
+      font-weight: bold;
+    }
+
+    span {
+      margin: 5px;
+      padding: 5px;
+      font-size: 120px;
+    }
+
+    button {
+      background-color: darkcyan;
+      color: white;
+      font-size: 25px;
+      padding: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div>
+      <button id="newSumButton" onclick="getNewSum();">Get New Sum</button>
+      <button id="showAnswerButton" onclick="showAnswer();">Show Answer</button>
+    </div>
+    <div>
+      <span id="num1">00</span>
+      <span id="operator">+</span>
+      <span id="num2">00</span>
+      <span>=</span>
+      <span id="answer">?</span>
+    </div>
+  </div>
+
+  <script>
+    function getRandomNumber(min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+    }
+
+    function decideNumbers() {
+      const x = getRandomNumber(10, 99);
+      const y = getRandomNumber(10, 99);
+
+      if (x > y) {
+        document.getElementById('num1').innerHTML = x;
+        document.getElementById('num2').innerHTML = y;
+      } else {
+        decideNumbers();
+      }
+    }
+
+    function getNewSum() {
+      decideNumbers();
+      document.getElementById('answer').innerHTML = '?';
+      if (getRandomNumber(1, 2) === 1) {
+        document.getElementById('operator').innerHTML = "+";
+      } else {
+        document.getElementById('operator').innerHTML = "-";
+      }
+    }
+
+    function showAnswer() {
+      const x = parseFloat(document.getElementById('num1').innerHTML);
+      const y = parseFloat(document.getElementById('num2').innerHTML);
+      const operator = document.getElementById('operator').innerHTML;
+      let answer = '?';
+      switch (operator) {
+        case '+':
+          answer = x + y;
+          break;
+        case '-':
+          answer = x - y;
+          break;
+      }
+      document.getElementById('answer').innerHTML = answer;
+    }
+  </script>
+</body>
+
+
+</html>
